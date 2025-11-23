@@ -1,0 +1,31 @@
+/* Moved from root: countdown-frontend.css */
+.countdown_box { 
+    display: flex; 
+    flex-direction: column; 
+    margin:0 4px; 
+    background:rgba(0,0,0,0.7); /* black, semi-transparent */
+    border-radius:8px; 
+    padding: 0.5em; 
+}
+.mgb-countdown-value { font-size:1.3em; font-weight:bold; color:#222; }
+.mgb-countdown-wrapper { text-align:center; margin:1em 0; }
+.mgb-countdown-timer { font-size:1.5em; font-weight:bold; }
+.mgb-countdown-label { color:#666; margin-top:0.5em; }
+
+
+.mgb-countdown-timer[data-fancy="1"] {
+    display: flex;
+    justify-content: center;    
+}
+.mgb-countdown-timer[data-fancy="1"] .mgb-countdown-value { 
+    font-size:1.3em; 
+    font-weight:bold; 
+    color:#fff; 
+}
+.mgb-countdown-timer[data-fancy="1"] .mgb-countdown-label { 
+    color:#fff; 
+    font-size: small;
+
+    margin-top:0.5em; 
+    margin-bottom:2px;
+}
