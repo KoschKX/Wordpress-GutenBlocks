@@ -46,7 +46,46 @@ add_action('init', function() {
     }
 }, 10);
 
+
+// Register marquee block
+add_action('init', function() {
+    if (!WP_Block_Type_Registry::get_instance()->is_registered('mgb/marquee')) {
+        register_block_type('mgb/marquee', array(
+            'editor_script' => 'mgb-marquee-block',
+            'render_callback' => 'mgb_marquee_render',
+            'attributes' => array(
+                'text' => array('type' => 'string', 'default' => ''),
+                'speed' => array('type' => 'number', 'default' => 50),
+            ),
+        ));
+    }
+}, 10);
+
+// Enqueue marquee frontend JS
+add_action('wp_enqueue_scripts', function() {
+    wp_enqueue_script(
+        'mgb-marquee-frontend',
+        plugins_url('marquee/marquee-frontend.js', __FILE__),
+        array(),
+        filemtime(plugin_dir_path(__FILE__) . 'marquee/marquee-frontend.js'),
+        true
+    );
+});
+
+// Register marquee block editor script
+add_action('init', function() {
+    wp_register_script(
+        'mgb-marquee-block',
+        plugins_url('marquee/marquee-block.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components'),
+        filemtime(plugin_dir_path(__FILE__) . 'marquee/marquee-block.js'),
+        true
+    );
+});
+
 // Include the countdown block PHP render function
 require_once plugin_dir_path(__FILE__) . 'countdown/countdown.php';
+// Include the marquee block PHP render function
+require_once plugin_dir_path(__FILE__) . 'marquee/marquee.php';
 
 
