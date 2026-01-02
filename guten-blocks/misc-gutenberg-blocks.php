@@ -61,15 +61,18 @@ add_action('init', function() {
     }
 }, 10);
 
-// Enqueue marquee frontend JS
+// Enqueue marquee frontend JS only when block is used
 add_action('wp_enqueue_scripts', function() {
-    wp_enqueue_script(
-        'mgb-marquee-frontend',
-        plugins_url('marquee/marquee-frontend.js', __FILE__),
-        array(),
-        filemtime(plugin_dir_path(__FILE__) . 'marquee/marquee-frontend.js'),
-        true
-    );
+    // Only enqueue if the block is actually on the page
+    if (has_block('mgb/marquee')) {
+        wp_enqueue_script(
+            'mgb-marquee-frontend',
+            plugins_url('marquee/marquee-frontend.js', __FILE__),
+            array(),
+            filemtime(plugin_dir_path(__FILE__) . 'marquee/marquee-frontend.js'),
+            true
+        );
+    }
 });
 
 // Register marquee block editor script
